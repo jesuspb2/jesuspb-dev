@@ -1,0 +1,211 @@
+---
+const tabs = [
+  { id: 'stack',      label: 'stack.toml' },
+  { id: 'projects',   label: 'projects/' },
+  { id: 'experience', label: 'experience.log' },
+  { id: 'blog',       label: 'blog/' },
+  { id: 'contact',    label: 'contact.sh' },
+];
+---
+
+<div class="chrome-wrap" id="chrome">
+
+  <!-- Window chrome bar -->
+  <div class="chrome-bar">
+    <div class="traffic-lights" aria-hidden="true">
+      <span class="dot red"></span>
+      <span class="dot yellow"></span>
+      <span class="dot green"></span>
+    </div>
+    <span class="chrome-title">jesus@portfolio: ~ — zsh</span>
+    <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
+      <span class="lbl-light">☀ light</span>
+      <span class="lbl-dark">☾ dark</span>
+    </button>
+  </div>
+
+  <!-- Prompt line -->
+  <div class="prompt-line">
+    <span class="p-user">jesus@portfolio</span>
+    <span class="p-colon">:</span>
+    <span class="p-tilde">~</span>
+    <span class="p-dollar">$</span>
+    <span class="p-cmd" id="prompt-text"></span>
+    <span class="p-cursor" aria-hidden="true"></span>
+  </div>
+
+  <!-- Nav tab bar -->
+  <nav class="nav-bar" aria-label="Sections">
+    <span class="nav-label" aria-hidden="true">:nav</span>
+    {tabs.map((tab, i) => (
+      <a
+        href={`#${tab.id}`}
+        class:list={['nav-tab', i === 0 && 'first']}
+        data-target={tab.id}
+      >{tab.label}</a>
+    ))}
+  </nav>
+
+</div>
+
+<style>
+  .chrome-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface2);
+  }
+
+  /* ── Chrome bar ── */
+  .chrome-bar {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    gap: 10px;
+  }
+
+  .traffic-lights {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .red    { background: #ff5f56; }
+  .yellow { background: #ffbd2e; }
+  .green  { background: #27c93f; }
+
+  .chrome-title {
+    flex: 1;
+    text-align: center;
+    font-size: 11px;
+    color: var(--fg-dim);
+  }
+
+  .theme-btn {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--fg-dim);
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 10px;
+    padding: 3px 8px;
+    transition: color 0.12s, border-color 0.12s;
+    flex-shrink: 0;
+  }
+
+  .theme-btn:hover { color: var(--fg); border-color: var(--border-s); }
+
+  /* light/dark label visibility */
+  .lbl-light { display: none; }
+  .lbl-dark  { display: inline; }
+  [data-theme="light"] .lbl-light { display: inline; }
+  [data-theme="light"] .lbl-dark  { display: none; }
+
+  /* ── Prompt line ── */
+  .prompt-line {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 20px 4px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .p-user   { color: var(--accent); }
+  .p-colon  { color: var(--fg-mute); }
+  .p-tilde  { color: var(--keyword); }
+  .p-dollar { color: var(--fg-mute); }
+  .p-cmd    { color: var(--fg); }
+
+  .p-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--fg);
+    margin-left: 2px;
+    animation: b-blink 1s steps(2) infinite;
+  }
+
+  /* ── Nav bar ── */
+  .nav-bar {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    overflow-x: auto;
+  }
+
+  .nav-label {
+    color: var(--fg-mute);
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  .nav-tab {
+    display: inline-block;
+    padding: 8px 12px;
+    color: var(--fg-dim);
+    text-decoration: none;
+    border-right: 1px solid var(--border);
+    white-space: nowrap;
+    transition: color 0.12s, background 0.12s;
+    flex-shrink: 0;
+  }
+
+  .nav-tab.first {
+    border-left: 1px solid var(--border);
+  }
+
+  .nav-tab:hover {
+    color: var(--accent);
+    background: var(--gutter);
+  }
+</style>
+
+<script>
+  // ── Prompt typing animation ──
+  const promptEl = document.getElementById('prompt-text');
+  const full = './portfolio --about';
+  let i = 0;
+  const typingId = setInterval(() => {
+    i++;
+    if (promptEl) promptEl.textContent = full.slice(0, i);
+    if (i >= full.length) clearInterval(typingId);
+  }, 40);
+
+  // ── Theme toggle ──
+  const applyTheme = (theme: string) => {
+    if (theme === 'light') {
+      document.documentElement.dataset.theme = 'light';
+    } else {
+      delete document.documentElement.dataset.theme;
+    }
+    localStorage.setItem('theme', theme);
+  };
+
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    const isLight = document.documentElement.dataset.theme === 'light';
+    applyTheme(isLight ? 'dark' : 'light');
+  });
+
+  // ── Nav smooth scroll ──
+  document.querySelectorAll('.nav-tab').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = (link as HTMLElement).dataset.target;
+      if (!target) return;
+      const el = document.getElementById(target);
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 110;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>

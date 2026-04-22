@@ -1,0 +1,128 @@
+---
+const row1 = [
+  'Python', 'TypeScript', 'Playwright', 'AWS', 'Kafka',
+  'Terraform', 'GitHub Actions', 'Docker',
+];
+
+const row2 = [
+  'Backstage', 'pytest', 'React', 'Node.js',
+  'Grafana', 'Kubernetes', 'PostgreSQL', 'Linux',
+];
+---
+
+<section class="stack-section">
+  <div class="container">
+    <h2 class="section-title">My Tech-Stack</h2>
+  </div>
+
+  <div class="marquee-wrap">
+    <!-- Rail 1: → -->
+    <div class="rail" aria-hidden="true">
+      <div class="track track-fwd">
+        {[...row1, ...row1, ...row1, ...row1].map((t) => <span class="chip">{t}</span>)}
+      </div>
+    </div>
+
+    <!-- Rail 2: ← -->
+    <div class="rail" aria-hidden="true">
+      <div class="track track-rev">
+        {[...row2, ...row2, ...row2, ...row2].map((t) => <span class="chip">{t}</span>)}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .stack-section {
+    padding-block: 1.5rem 3rem;
+  }
+
+  .section-title {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--border);
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+
+  /* ── Marquee wrapper ── */
+  .marquee-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    overflow: hidden;
+    /* fade edges */
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+  }
+
+  .rail {
+    overflow: hidden;
+  }
+
+  .track {
+    display: flex;
+    gap: 0.6rem;
+    width: max-content;
+  }
+
+  .track-fwd {
+    animation: scroll-left 28s linear infinite;
+  }
+
+  .track-rev {
+    animation: scroll-right 32s linear infinite;
+  }
+
+  @keyframes scroll-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-25%); }
+  }
+
+  @keyframes scroll-right {
+    from { transform: translateX(-25%); }
+    to   { transform: translateX(0); }
+  }
+
+  /* pause on hover */
+  .marquee-wrap:hover .track {
+    animation-play-state: paused;
+  }
+
+  /* ── Chip ── */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    background: color-mix(in srgb, var(--surface) 70%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.3rem 0.85rem;
+    white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s;
+    cursor: default;
+  }
+
+  .chip:hover {
+    color: var(--text);
+    border-color: var(--text-muted);
+  }
+</style>

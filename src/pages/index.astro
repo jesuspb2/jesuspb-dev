@@ -1,0 +1,486 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WindowChrome from '../components/WindowChrome.astro';
+import Pane from '../components/Pane.astro';
+import ContactForm from '../components/ContactForm';
+import type { ImageMetadata } from 'astro';
+
+import imgPython     from '../assets/skills/python.svg';
+import imgTypeScript from '../assets/skills/typescript.svg';
+import imgPlaywright from '../assets/skills/playwright.svg';
+import imgAws        from '../assets/skills/aws.svg';
+import imgDocker     from '../assets/skills/docker.svg';
+import imgTerraform  from '../assets/skills/terraform.svg';
+import imgSql        from '../assets/skills/sql.svg';
+import imgK6         from '../assets/skills/k6.png';
+import imgKafka      from '../assets/skills/kafka.svg';
+
+const stack: Array<{ label: string; img?: ImageMetadata; darkInvert?: boolean }> = [
+  { label: 'Python',         img: imgPython     },
+  { label: 'TypeScript',     img: imgTypeScript },
+  { label: 'Playwright',     img: imgPlaywright },
+  { label: 'AWS',            img: imgAws        },
+  { label: 'Kafka',          img: imgKafka,      darkInvert: true },
+  { label: 'Backstage'                          },
+  { label: 'pytest'                             },
+  { label: 'Docker',         img: imgDocker     },
+  { label: 'Kubernetes'                         },
+  { label: 'Terraform',      img: imgTerraform  },
+  { label: 'GitHub Actions'                     },
+  { label: 'Grafana'                            },
+  { label: 'PostgreSQL',     img: imgSql        },
+  { label: 'k6',             img: imgK6         },
+  { label: 'Linux'                              },
+];
+
+const projects = [
+  {
+    name: 'backstage-qa-plugin',
+    desc: 'Internal Backstage plugin surfacing test coverage, flake rate and CI health per service. Owned E2E design and rollout to 40+ teams.',
+    tags: ['Backstage','TypeScript','React'],
+    stars: '★ 142', year: '2026',
+    href: 'https://github.com/jesuspb2',
+  },
+  {
+    name: 'pyramid-runner',
+    desc: 'Opinionated orchestrator that runs unit / integration / contract / e2e layers in parallel with smart retries and flake quarantine.',
+    tags: ['Python','pytest','Kafka'],
+    stars: '★ 89', year: '2025',
+    href: 'https://github.com/jesuspb2',
+  },
+  {
+    name: 'playwright-sharder',
+    desc: 'Dynamic sharding for Playwright on GitHub Actions. Cut median pipeline from 24m to 6m across the platform monorepo.',
+    tags: ['TypeScript','Playwright','CI'],
+    stars: '★ 67', year: '2025',
+    href: 'https://github.com/jesuspb2',
+  },
+];
+
+const experience = [
+  { date: '2024-01', level: 'INFO', msg: 'joined XM Group as SDET & Platform Engineer', perf: false },
+  { date: '2023-11', level: 'INFO', msg: 'rolled out backstage-qa-plugin to 40+ teams',   perf: false },
+  { date: '2023-06', level: 'PERF', msg: 'cut CI pipeline 24m → 6m via dynamic sharding', perf: true  },
+  { date: '2022-03', level: 'INFO', msg: 'promoted to Senior QA Engineer',                 perf: false },
+  { date: '2020-09', level: 'INFO', msg: 'started career in test automation',               perf: false },
+];
+
+const blogPosts = [
+  { date: '2026-03-14', size: '4.2K', file: 'quarantine-is-not-a-strategy.md', slug: 'shift-left-testing' },
+  { date: '2025-11-02', size: '7.1K', file: 'backstage-test-taxonomy.md',       slug: 'playwright-patterns' },
+  { date: '2025-06-18', size: '5.8K', file: 'shift-left-but-mean-it.md',        slug: 'shift-left-testing' },
+];
+---
+
+<BaseLayout>
+  <div class="shell">
+
+    <WindowChrome />
+
+    <div class="content">
+
+      <!-- whoami.py hero — code block -->
+      <div class="hero-wrap">
+        <Pane label="whoami.py" right="python · 17 lines" noPad>
+          <div class="code-grid">
+            <!-- gutter -->
+            <div class="gutter" aria-hidden="true">
+              {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17].map(n => <div class="ln">{n}</div>)}
+            </div>
+            <!-- code -->
+            <div class="code">
+              <div><span class="kw">class</span> <span class="fn">Jesus</span><span class="fg">(SDET, PlatformEngineer):</span></div>
+              <div class="i1"><span class="str">"""</span></div>
+              <div class="i1"><span class="doc">SDET with 5+ years leading quality strategy</span></div>
+              <div class="i1"><span class="doc">for cloud-native and platform engineering environments.</span></div>
+              <div class="i1"><span class="doc">Currently at XM, owning the full test pyramid</span></div>
+              <div class="i1"><span class="doc">for a Backstage-based IDP.</span></div>
+              <div>&nbsp;</div>
+              <div class="i1"><span class="doc">Passionate about shift-left testing and devex.</span></div>
+              <div class="i1"><span class="str">"""</span></div>
+              <div>&nbsp;</div>
+              <div class="i1"><span class="fg">location  </span><span class="dim">= </span><span class="str">"Europe · remote"</span></div>
+              <div class="i1"><span class="fg">currently </span><span class="dim">= </span><span class="str">"XM Group"</span></div>
+              <div class="i1"><span class="fg">focus     </span><span class="dim">= [</span><span class="str">"shift-left"</span><span class="fg">, </span><span class="str">"devex"</span><span class="fg">, </span><span class="str">"idp"</span><span class="dim">]</span></div>
+              <div class="i1"><span class="fg">years     </span><span class="dim">= </span><span class="num">5</span><span class="fg"> </span><span class="com"> # and counting</span></div>
+              <div>&nbsp;</div>
+              <div class="i1"><span class="kw">def</span> <span class="fn">mission</span><span class="fg">(self):</span></div>
+              <div class="i2"><span class="kw">return</span><span class="fg"> </span><span class="str"> "ship fast, sleep better"</span></div>
+            </div>
+          </div>
+        </Pane>
+      </div>
+
+      <!-- stack.toml -->
+      <Pane id="stack" label="stack.toml" right={`${stack.length} entries`}>
+        <div class="toml-header">[tools]</div>
+        <div class="chips">
+          {stack.map(t => (
+            <span class="chip">
+              {t.img
+                ? <img src={t.img.src} alt={t.label} title={t.label} class:list={['chip-img', t.darkInvert && 'chip-img--dark-invert']} />
+                : t.label
+              }
+            </span>
+          ))}
+        </div>
+      </Pane>
+
+      <!-- projects/ -->
+      <Pane id="projects" label="projects/" right={`${projects.length} repos`} noPad>
+        {projects.map((p, i) => (
+          <a
+            href={p.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class:list={['project-row', i < projects.length - 1 && 'divider']}
+          >
+            <div class="project-head">
+              <span class="perm">drwxr-xr-x</span>
+              <span class="pname">{p.name}/</span>
+              <span class="flex1"></span>
+              <span class="pmeta">{p.stars}</span>
+              <span class="pmeta">{p.year}</span>
+            </div>
+            <p class="pdesc">{p.desc}</p>
+            <div class="chips">
+              {p.tags.map(t => <span class="chip">{t}</span>)}
+            </div>
+          </a>
+        ))}
+      </Pane>
+
+      <!-- experience.log -->
+      <Pane id="experience" label="experience.log" right="tail -n 20">
+        <div class="exp-list">
+          {experience.map(e => (
+            <div class="exp-row">
+              <span class="exp-date">{e.date}</span>
+              <span class:list={['exp-level', e.perf && 'perf']}>[{e.level}]</span>
+              <span class="exp-msg">{e.msg}</span>
+            </div>
+          ))}
+        </div>
+      </Pane>
+
+      <!-- blog/ -->
+      <Pane id="blog" label="blog/" right="ls -t">
+        <div class="blog-list">
+          {blogPosts.map((w, i) => (
+            <a href={`/blog/${w.slug}`} class:list={['blog-row', i < blogPosts.length - 1 && 'dashed']}>
+              <span class="blog-date">{w.date}</span>
+              <span class="blog-size">{w.size}</span>
+              <span class="blog-file">{w.file}</span>
+            </a>
+          ))}
+        </div>
+      </Pane>
+
+      <!-- identity + contact side by side -->
+      <div class="bottom-grid">
+
+        <Pane label="identity">
+        <div class="identity-head">
+          <div class="avatar" aria-hidden="true">J</div>
+          <div>
+            <div class="id-name">Jesús Prian Baena</div>
+            <div class="id-role">SDET &amp; Platform Engineer</div>
+          </div>
+        </div>
+        <div class="id-meta">
+          <div><span class="key">location </span>Europe · remote</div>
+          <div><span class="key">timezone </span>UTC+1</div>
+          <div><span class="key">pgp      </span>0xA7F3C2B...9D</div>
+        </div>
+        <div class="connect-list">
+          {[
+            { k: 'github  ', v: 'github.com/jesuspb2',      href: 'https://github.com/jesuspb2' },
+            { k: 'linkedin', v: 'linkedin.com/in/jesuspb2', href: 'https://linkedin.com/in/jesuspb2' },
+            { k: 'email   ', v: 'hello@jesuspb.dev',        href: 'mailto:hello@jesuspb.dev' },
+            { k: 'blog    ', v: 'jesuspb.dev/blog',         href: '/blog' },
+          ].map(l => (
+            <a
+              href={l.href}
+              target={l.href.startsWith('http') ? '_blank' : undefined}
+              rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              class="connect-row"
+            >
+              <span class="key">{l.k}</span>
+              <span class="arr">→</span>
+              <span class="str">{l.v}</span>
+            </a>
+          ))}
+        </div>
+      </Pane>
+
+        <Pane id="contact" label="contact.sh">
+          <div class="com contact-comment"># reach out — replies within 24h</div>
+          <ContactForm client:load />
+        </Pane>
+
+      </div><!-- /bottom-grid -->
+
+    </div><!-- /content -->
+
+  </div><!-- /shell -->
+</BaseLayout>
+
+<style>
+  .shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+  }
+
+  .content {
+    flex: 1;
+    padding: 12px 20px 0;
+  }
+
+  /* ── Hero code block ── */
+  .hero-wrap { margin-bottom: 20px; }
+
+  .code-grid {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .gutter {
+    background: var(--gutter);
+    padding: 14px 0;
+    text-align: right;
+    color: var(--fg-mute);
+    font-size: 11px;
+    border-right: 1px solid var(--border);
+    user-select: none;
+  }
+
+  .gutter .ln { padding: 0 10px; }
+
+  .code {
+    padding: 14px 18px;
+    overflow-x: auto;
+  }
+
+  .code > div {
+    white-space: pre;
+    min-height: 1.7em;
+  }
+
+  /* Syntax tokens */
+  .kw  { color: var(--keyword); }
+  .fn  { color: var(--accent); }
+  .str { color: var(--string); }
+  .num { color: var(--number); }
+  .com { color: var(--comment); font-style: italic; }
+  .doc { color: var(--string); opacity: 0.75; font-style: italic; white-space: pre-wrap; }
+  .fg  { color: var(--fg); }
+  .dim { color: var(--fg-dim); }
+  .i1 { padding-left: 4ch; }
+  .i2 { padding-left: 8ch; }
+
+  /* ── Stack chips ── */
+  .toml-header {
+    font-size: 12px;
+    color: var(--fg-dim);
+    margin-bottom: 12px;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 9px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    font-size: 11px;
+    color: var(--fg-dim);
+    background: var(--gutter);
+  }
+
+  .chip-img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    display: block;
+    filter: grayscale(20%);
+    transition: filter 0.15s;
+  }
+
+  .chip:has(.chip-img) {
+    padding: 5px 10px;
+  }
+
+  .chip:hover .chip-img {
+    filter: grayscale(0%);
+  }
+
+  :global(html:not([data-theme="light"])) .chip-img--dark-invert {
+    filter: invert(1);
+  }
+
+  /* ── Projects ── */
+  .project-row {
+    display: block;
+    padding: 16px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.12s;
+  }
+
+  .project-row:hover { background: var(--gutter); }
+
+  .project-row.divider {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .project-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .perm   { color: var(--fg-mute); font-size: 11px; }
+  .pname  { color: var(--accent); font-size: 13px; font-weight: 600; }
+  .flex1  { flex: 1; }
+  .pmeta  { font-size: 11px; color: var(--fg-mute); }
+
+  .pdesc {
+    margin: 0 0 8px;
+    color: var(--fg-dim);
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+
+  /* ── Experience ── */
+  .exp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 12.5px;
+  }
+
+  .exp-row {
+    display: grid;
+    grid-template-columns: 72px 54px 1fr;
+    gap: 12px;
+    align-items: baseline;
+  }
+
+  .exp-date  { color: var(--fg-mute); }
+  .exp-level { color: var(--accent); font-size: 11px; }
+  .exp-level.perf { color: var(--number); }
+  .exp-msg   { color: var(--fg); }
+
+  /* ── Blog ── */
+  .blog-list {
+    display: flex;
+    flex-direction: column;
+    font-size: 12.5px;
+  }
+
+  .blog-row {
+    display: grid;
+    grid-template-columns: 100px 60px 1fr;
+    gap: 14px;
+    align-items: center;
+    padding: 8px 0;
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.12s;
+  }
+
+  .blog-row.dashed {
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .blog-row:hover .blog-file { color: var(--accent); }
+
+  .blog-date { color: var(--fg-mute); }
+  .blog-size { color: var(--number); }
+  .blog-file { color: var(--fg); }
+
+  /* ── Bottom grid (contact + identity) ── */
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  /* ── Contact ── */
+  .contact-comment { font-size: 12px; margin-bottom: 20px; }
+
+  @media (max-width: 640px) {
+    .bottom-grid { grid-template-columns: 1fr; }
+
+    .code-grid {
+      grid-template-columns: 32px 1fr;
+      font-size: 11px;
+    }
+  }
+
+  /* identity pane */
+  .identity-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+
+  .avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid var(--border-s);
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--fg);
+    flex-shrink: 0;
+  }
+
+  .id-name  { font-size: 17px; font-weight: 600; color: var(--fg); }
+  .id-role  { font-size: 12px; color: var(--fg-dim); }
+
+  .id-meta {
+    font-size: 12px;
+    color: var(--fg-dim);
+    line-height: 1.8;
+  }
+
+  .key { color: var(--fg-mute); }
+
+  .connect-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 12px;
+    margin-top: 16px;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  .connect-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    padding: 4px 0;
+  }
+
+  .arr { color: var(--fg-mute); }
+</style>

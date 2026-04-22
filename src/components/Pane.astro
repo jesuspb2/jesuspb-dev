@@ -1,0 +1,49 @@
+---
+interface Props {
+  label: string;
+  right?: string;
+  id?: string;
+  noPad?: boolean;
+}
+const { label, right, id, noPad = false } = Astro.props;
+---
+
+<section class:list={['pane', noPad && 'no-pad']} id={id}>
+  <header class="pane-hd">
+    <span class="bar">▎</span>
+    <span class="lbl">{label}</span>
+    <span class="gap"></span>
+    {right && <span class="meta">{right}</span>}
+  </header>
+  <div class="pane-body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .pane {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+    margin-bottom: 20px;
+    scroll-margin-top: 120px;
+  }
+
+  .pane-hd {
+    display: flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--fg-dim);
+    background: var(--surface2);
+  }
+
+  .bar   { color: var(--accent); margin-right: 6px; flex-shrink: 0; }
+  .lbl   { letter-spacing: 0.03em; text-transform: lowercase; }
+  .gap   { flex: 1; }
+  .meta  { color: var(--fg-mute); font-size: 10px; }
+
+  .pane-body      { padding: 20px; }
+  .no-pad .pane-body { padding: 0; }
+</style>

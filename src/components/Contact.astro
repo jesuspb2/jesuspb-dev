@@ -1,0 +1,130 @@
+---
+import ContactForm from './ContactForm.tsx';
+---
+
+<section class="contact" id="contact">
+  <div class="container">
+
+    <h2 class="section-title">Contact</h2>
+
+    <div class="contact-card">
+      <p class="contact-text">
+        I'm always open to discussing testing strategy, platform engineering,
+        or interesting problems worth solving together.
+      </p>
+
+      <ul class="socials">
+        <li>
+          <a href="https://github.com/jesuspb2" target="_blank" rel="noopener noreferrer" class="social-link">
+            github <span aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://linkedin.com/in/jesuspb2" target="_blank" rel="noopener noreferrer" class="social-link">
+            linkedin <span aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:hi@jesuspb.dev" class="social-link">
+            hi@jesuspb.dev <span aria-hidden="true">↗</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="form-card">
+      <ContactForm client:load />
+    </div>
+
+    <footer class="footer">
+      <span>jesuspb.dev</span>
+      <span class="sep" aria-hidden="true">·</span>
+      <span>built with Astro</span>
+    </footer>
+
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding-block: 5rem 6rem;
+  }
+
+  .section-title {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--border);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    background: color-mix(in srgb, var(--surface) 60%, transparent);
+    margin-bottom: 1rem;
+  }
+
+  .contact-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
+  }
+
+  .socials {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.775rem;
+    color: var(--text-muted);
+    padding-block: 0.25rem;
+    transition: color 0.15s;
+  }
+
+  .social-link:hover {
+    color: var(--accent);
+  }
+
+  .social-link span {
+    transition: transform 0.15s;
+    display: inline-block;
+    font-size: 0.7rem;
+  }
+
+  .social-link:hover span {
+    transform: translate(2px, -2px);
+  }
+
+  .form-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: color-mix(in srgb, var(--surface) 60%, transparent);
+    margin-bottom: 3rem;
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .sep { color: var(--border); }
+</style>
