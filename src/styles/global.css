@@ -3,14 +3,14 @@
 /* ── Design tokens — dark default ── */
 :root {
   --font:       "JetBrains Mono", ui-monospace, Menlo, monospace;
-  --bg:         #0b0d0c;
-  --surface:    #111413;
-  --surface2:   #0e110f;
+  --bg:         #141414;
+  --surface:    #1a1a1a;
+  --surface2:   #171717;
   --border:     rgba(255,255,255,0.07);
   --border-s:   rgba(255,255,255,0.14);
-  --fg:         #d6d3c7;
-  --fg-dim:     #7c8a82;
-  --fg-mute:    #4a5250;
+  --fg:         #e8e6e1;
+  --fg-dim:     #a8b5ae;
+  --fg-mute:    #6b7c76;
   --accent:     #10b981;
   --keyword:    #c792ea;
   --string:     #a5e075;

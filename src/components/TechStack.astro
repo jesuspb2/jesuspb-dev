@@ -19,14 +19,14 @@ const row2 = [
     <!-- Rail 1: → -->
     <div class="rail" aria-hidden="true">
       <div class="track track-fwd">
-        {[...row1, ...row1, ...row1, ...row1].map((t) => <span class="chip">{t}</span>)}
+        {[...row1, ...row1].map((t) => <span class="chip">{t}</span>)}
       </div>
     </div>
 
     <!-- Rail 2: ← -->
     <div class="rail" aria-hidden="true">
       <div class="track track-rev">
-        {[...row2, ...row2, ...row2, ...row2].map((t) => <span class="chip">{t}</span>)}
+        {[...row2, ...row2].map((t) => <span class="chip">{t}</span>)}
       </div>
     </div>
   </div>
@@ -84,20 +84,29 @@ const row2 = [
   }
 
   .track-fwd {
-    animation: scroll-left 28s linear infinite;
+    animation: scroll-left 14s linear infinite;
   }
 
   .track-rev {
-    animation: scroll-right 32s linear infinite;
+    animation: scroll-right 16s linear infinite;
+  }
+
+  @media (max-width: 640px) {
+    .track-fwd {
+      animation: scroll-left 4s linear infinite;
+    }
+    .track-rev {
+      animation: scroll-right 5s linear infinite;
+    }
   }
 
   @keyframes scroll-left {
     from { transform: translateX(0); }
-    to   { transform: translateX(-25%); }
+    to   { transform: translateX(-50%); }
   }
 
   @keyframes scroll-right {
-    from { transform: translateX(-25%); }
+    from { transform: translateX(-50%); }
     to   { transform: translateX(0); }
   }
 

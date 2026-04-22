@@ -14,6 +14,7 @@ const { label, right, id, noPad = false } = Astro.props;
     <span class="lbl">{label}</span>
     <span class="gap"></span>
     {right && <span class="meta">{right}</span>}
+    <slot name="right" />
   </header>
   <div class="pane-body">
     <slot />

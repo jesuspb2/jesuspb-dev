@@ -107,9 +107,10 @@ export default function ContactForm() {
         }
 
         label {
-          font-size: 11px;
-          color: var(--fg-mute);
+          font-size: 13px;
+          color: var(--fg);
           letter-spacing: 0.04em;
+          font-weight: 600;
         }
 
         input,
