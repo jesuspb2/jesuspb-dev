@@ -48,7 +48,9 @@ CSS custom properties (defined in `global.css`) drive all colors: `--bg`, `--sur
 
 ## Workflow
 
-After completing any task, always provide a suggested commit message summarizing all changes made.
+After completing any task, always provide a suggested commit message summarizing all changes made, then ask the user if they want to commit. If they confirm, run `git add` on the relevant files and `git commit` with the suggested message.
+
+If the user declines, keep a running mental list of all changes made so far in the session. When the user eventually wants to commit, consolidate everything into a single commit message covering all accumulated changes.
 
 ## SVG Icons
 
