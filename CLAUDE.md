@@ -46,12 +46,6 @@ CSS custom properties (defined in `global.css`) drive all colors: `--bg`, `--sur
 - `src/components/TechStack.astro` — dual-row infinite marquee; skill icons live in `src/assets/skills/`
 - `src/content.config.ts` — blog collection schema (title, description, pubDate, tags, draft)
 
-## Workflow
-
-After completing any task, always provide a suggested commit message summarizing all changes made, then ask the user if they want to commit. If they confirm, run `git add` on the relevant files and `git commit` with the suggested message.
-
-If the user declines, keep a running mental list of all changes made so far in the session. When the user eventually wants to commit, consolidate everything into a single commit message covering all accumulated changes.
-
 ## SVG Icons
 
 Skill icons in `src/assets/skills/` are imported as Astro `ImageMetadata` by default. **Exception**: `aws.svg` is imported with `?raw` (raw string) so `currentColor` fills inherit the theme text color. New icons with theme-aware colors need the same `?raw` treatment and inline `set:html`.
