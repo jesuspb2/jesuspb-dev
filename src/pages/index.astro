@@ -64,11 +64,36 @@ const projects = [
 ];
 
 const experience = [
-  { date: '2024-01', level: 'INFO', msg: 'joined XM Group as SDET & Platform Engineer', perf: false },
-  { date: '2023-11', level: 'INFO', msg: 'rolled out backstage-qa-plugin to 40+ teams',   perf: false },
-  { date: '2023-06', level: 'PERF', msg: 'cut CI pipeline 24m → 6m via dynamic sharding', perf: true  },
-  { date: '2022-03', level: 'INFO', msg: 'promoted to Senior QA Engineer',                 perf: false },
-  { date: '2020-09', level: 'INFO', msg: 'started career in test automation',               perf: false },
+  {
+    date: '2025-12',
+    level: 'INFO',
+    title: 'XM · SDET & Platform Engineer',
+    bullets: [
+      'Built full-stack automation framework for Backstage IDP from scratch.',
+      'Architected POM layer in Playwright — cut flakiness, enabled parallel CI execution.',
+      'Owned quality strategy: coverage targets, test pyramid, CI/CD gates.',
+      'Embedded API + integration tests in dev workflows via Shift-Left.',
+    ],
+  },
+  {
+    date: '2023-01',
+    level: 'INFO',
+    title: 'Align Technology · SDET',
+    bullets: [
+      'Built Pytest + Behave BDD frameworks for serverless microservices.',
+      'Contract tests for Kafka/EventBridge — caught schema drift pre-production.',
+      'CI/CD pipelines with build → test → deploy gates + AWS Step Functions.',
+    ],
+  },
+  {
+    date: '2020-12',
+    level: 'INFO',
+    title: 'Siemens · Electrical & Project Engineer',
+    bullets: [
+      'Delivered large-scale electrical projects end-to-end.',
+      'Designed Busbar and channeling systems in AutoCAD and Revit.',
+    ],
+  },
 ];
 
 ---
@@ -161,7 +186,7 @@ const experience = [
             <div class="cl i1"><span class="fg">location  </span><span class="dim">= </span><span class="str">"Europe · remote"</span></div>
 
             <div class="ln" aria-hidden="true">12</div>
-            <div class="cl i1"><span class="fg">currently </span><span class="dim">= </span><span class="str">"XM Group"</span></div>
+            <div class="cl i1"><span class="fg">currently </span><span class="dim">= </span><span class="str">"XM"</span></div>
 
             <div class="ln" aria-hidden="true">13</div>
             <div class="cl i1"><span class="fg">focus     </span><span class="dim">= [</span><span class="str">"shift-left"</span><span class="fg">, </span><span class="str">"devex"</span><span class="fg">, </span><span class="str">"idp"</span><span class="dim">]</span></div>
@@ -218,7 +243,7 @@ const experience = [
             <div class="cl i1"><span class="fg">location  </span><span class="dim">= </span><span class="str">"Europe · remote"</span></div>
 
             <div class="ln" aria-hidden="true">13</div>
-            <div class="cl i1"><span class="fg">currently </span><span class="dim">= </span><span class="str">"XM Group"</span></div>
+            <div class="cl i1"><span class="fg">currently </span><span class="dim">= </span><span class="str">"XM"</span></div>
 
             <div class="ln" aria-hidden="true">14</div>
             <div class="cl i1"><span class="fg">focus     </span><span class="dim">= [</span><span class="str">"shift-left"</span><span class="fg">, </span><span class="str">"devex"</span><span class="dim">]</span></div>
@@ -266,38 +291,25 @@ const experience = [
         </div>
       </Pane>
 
-      <!-- projects/ -->
-      <Pane id="projects" label="projects/" right={`${projects.length} repos`} noPad>
-        {projects.map((p, i) => (
-          <a
-            href={p.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            class:list={['project-row', i < projects.length - 1 && 'divider']}
-          >
-            <div class="project-head">
-              <span class="perm">drwxr-xr-x</span>
-              <span class="pname">{p.name}/</span>
-              <span class="flex1"></span>
-              <span class="pmeta">{p.stars}</span>
-              <span class="pmeta">{p.year}</span>
-            </div>
-            <p class="pdesc">{p.desc}</p>
-            <div class="chips">
-              {p.tags.map(t => <span class="chip">{t}</span>)}
-            </div>
-          </a>
-        ))}
-      </Pane>
-
       <!-- experience.log -->
       <Pane id="experience" label="experience.log" right="tail -n 20">
         <div class="exp-list">
           {experience.map(e => (
-            <div class="exp-row">
-              <span class="exp-date">{e.date}</span>
-              <span class:list={['exp-level', e.perf && 'perf']}>[{e.level}]</span>
-              <span class="exp-msg">{e.msg}</span>
+            <div class="exp-entry">
+              <div class="exp-row">
+                <span class="exp-date">{e.date}</span>
+                <span class="exp-level">[{e.level}]</span>
+                <span class="exp-title">{e.title}</span>
+              </div>
+              <div class="exp-bullets">
+                {e.bullets.map(b => (
+                  <div class="exp-bullet">
+                    <span class="exp-indent"></span>
+                    <span class="exp-arrow">&gt;</span>
+                    <span class="exp-msg">{b}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
@@ -527,21 +539,44 @@ const experience = [
   .exp-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 18px;
     font-size: 12.5px;
+  }
+
+  .exp-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
   .exp-row {
     display: grid;
-    grid-template-columns: 72px 54px 1fr;
-    gap: 12px;
+    grid-template-columns: 56px 46px 1fr;
+    column-gap: 6px;
     align-items: baseline;
   }
 
+  .exp-bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .exp-bullet {
+    display: grid;
+    /* indent = date col + level col + both gaps = 56 + 46 + 12 = 114px */
+    grid-template-columns: 114px 14px 1fr;
+    column-gap: 6px;
+    align-items: baseline;
+  }
+
+  .exp-indent { display: block; }
+  .exp-arrow  { color: var(--comment); }
+
   .exp-date  { color: var(--fg-mute); }
   .exp-level { color: var(--accent); font-size: 11px; }
-  .exp-level.perf { color: var(--number); }
-  .exp-msg   { color: var(--fg); }
+  .exp-title { color: var(--fg); font-weight: 600; }
+  .exp-msg   { color: var(--fg-mute); }
 
 /* ── Contact ── */
   .contact-comment { font-size: 12px; margin-bottom: 20px; }
@@ -552,6 +587,28 @@ const experience = [
   }
 
   @media (max-width: 640px) {
+    /* ── Experience mobile ── */
+    .exp-row {
+      display: block;
+    }
+    .exp-date, .exp-level {
+      display: inline;
+    }
+    .exp-level { margin-left: 4px; }
+    .exp-title {
+      display: block;
+      padding-left: 0;
+      margin-top: 2px;
+    }
+    .exp-bullet {
+      display: flex;
+      gap: 6px;
+      padding-left: 0;
+      grid-template-columns: unset;
+    }
+    .exp-indent { display: none; }
+    .exp-list { font-size: 11px; }
+
     .content { padding: 12px 10px 0; }
 
     .code-grid {
