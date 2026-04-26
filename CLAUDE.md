@@ -26,7 +26,7 @@ Copy `.env.example` to `.env` for local development:
 
 **Astro + React hybrid**: Astro handles all static rendering; React is used only for `ContactForm.tsx` (mounted with `client:load`). All other components are `.astro` files.
 
-**Deployment**: Static output (`output: 'static'`) deployed on Vercel. The contact form at `src/pages/api/contact.ts` is a serverless API route (POST) using Resend.
+**Deployment**: Static output (`output: 'static'`) deployed on Cloudflare Pages. The contact form is handled by a Cloudflare Pages Function at `functions/api/contact.ts` (POST) using Resend.
 
 **Styling**: TailwindCSS v4 via Vite plugin. Global design tokens live in `src/styles/global.css` — dark theme is the default, light mode toggled via `data-theme="light"` on `<html>` and persisted in `localStorage`. Font is JetBrains Mono throughout.
 
