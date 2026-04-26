@@ -12,6 +12,10 @@ npm run preview   # Preview production build locally
 
 No test or lint scripts are configured.
 
+## Commit Checklist
+
+Before every commit, always run `npx tsc --noEmit` and verify it exits with no errors. Do not commit if TypeScript reports errors.
+
 ## Environment Variables
 
 Copy `.env.example` to `.env` for local development:
