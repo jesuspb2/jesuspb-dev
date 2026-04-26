@@ -1,9 +1,11 @@
-import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
 
-export const prerender = false;
+interface Env {
+  RESEND_API_KEY: string;
+  TO_EMAIL: string;
+}
 
-export const POST: APIRoute = async ({ request }) => {
+export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   let body: unknown;
 
   try {
@@ -32,11 +34,11 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  const resend = new Resend(import.meta.env.RESEND_API_KEY);
+  const resend = new Resend(env.RESEND_API_KEY);
 
   const { error } = await resend.emails.send({
     from: 'Portfolio <onboarding@resend.dev>',
-    to: import.meta.env.TO_EMAIL,
+    to: env.TO_EMAIL,
     subject: `[jesuspb.dev] Message from ${name}`,
     html: `
       <p><strong>From:</strong> ${name} &lt;${email}&gt;</p>
