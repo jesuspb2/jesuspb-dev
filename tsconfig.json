@@ -11,9 +11,8 @@
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "allowJs": true,
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src", ".astro/types.d.ts"]
